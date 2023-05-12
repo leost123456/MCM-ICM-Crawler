@@ -1,0 +1,13 @@
+#注意可能由于国内IP问题，爬取速度会变慢，建议采用代理国外IP进行爬取，速度更快。
+
+#爬取的数量
+n: 24000 
+
+#线程数，根据自己的CPU性能进行选择。默认50
+n_thread: 50 
+
+#你安装的tesseract目录中的tesseract.exe文件的路径(下面是示例)
+tesseract_exe: D:\0\other\tesseract\tesseract.exe
+
+#下载安装的tessdata语言包的路径(下面是示例)
+tessdata: D:\0\other\tessdata

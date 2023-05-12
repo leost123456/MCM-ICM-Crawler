@@ -1,0 +1,8 @@
+loguru==0.7.0
+matplotlib
+numpy
+pandas
+pdf2image==1.16.3
+Pillow==9.1.0
+PyYAML==6.0
+Requests==2.30.0
