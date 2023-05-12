@@ -47,10 +47,10 @@ def request_data(url,image_path): #其中url是传入的url
         return None
 
 #下面进行OCR识别并进行提取需要的数据
-def extract_data(image,team_number,detect_advisor,student_name_re,faculty_name_re,school_re,awards_re): #输入图像
+def extract_data(tessdata,image,team_number,detect_advisor,student_name_re,faculty_name_re,school_re,awards_re): #输入图像
     try:
         #进行OCR识别
-        tessdata_dir_config = f'--tessdata-dir "{os.path.abspath(".")}\\plugin\\tessdata"' #语言包地址（外部导入）
+        tessdata_dir_config = f'--tessdata-dir "{tessdata}"' #语言包地址（外部导入）
         text=pytesseract.image_to_string(image,config=tessdata_dir_config,lang='eng') #进行OCR识别（英语）
         #进行匹配
         if detect_advisor.findall(text): #如果是有advisor的

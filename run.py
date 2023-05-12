@@ -5,7 +5,6 @@ import os
 from loguru import logger
 from Universal import request_data,extract_data,save_data,plot_data
 import yaml
-import winreg
 
 #主运行函数
 def main():
@@ -24,7 +23,7 @@ def main():
         #OCR识别并进行数据提取
         if image != None : #如果可以正确读取数据
             try:
-                student_name,faculty_name,school,awards=extract_data(image,url_index,detect_advisor,student_name_re,faculty_name_re,school_re,awards_re)
+                student_name,faculty_name,school,awards=extract_data(tessdata,image,url_index,detect_advisor,student_name_re,faculty_name_re,school_re,awards_re)
             except Exception as e:
                 continue
             #下面进行申请获取锁(防止多线程写入混乱)
