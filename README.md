@@ -4,7 +4,7 @@
 
  #### :golf:**1.一键运行安装包**
 
-1. 去release中解压MCM-ICM-Crawler文件，其中已经帮你配置好tesseract目录中的**tesseract.exe文件和****tessdata语言包**，你只需要更改config.yaml文件中的线程数和爬取数量。
+1. 去release中解压MCM-ICM-Crawler文件，其中已经帮你配置好tesseract目录中的**tesseract.exe文件和**和**tessdata语言包**，你只需要更改config.yaml文件中的线程数和爬取数量。
 2. 进入终端输入指令 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt安装依赖。
 3. 输入指令python run.py即可运行程序。
 
