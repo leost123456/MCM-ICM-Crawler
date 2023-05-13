@@ -12,7 +12,7 @@
 
 需要python版本>=3.8
 
-1. git clone https://github.com/leost123456/MCM-ICM-Crawler.git到本地仓库，或者直接下载源码。
+1. git clone https://github.com/leost123456/MCM-ICM-Crawler.git 到本地仓库，或者直接下载源码。
 2. 下载tesseract和其语言包，windows用户可去[链接](**https://digi.bib.uni-mannheim.de/tesseract/)**进行下载，并完成安装。
 3. 完成安装后，在config.yaml文件中填写tesseract目录中的**tesseract.exe文件的路径**、**tessdata语言包**的路径、线程数和爬取数量。
 4. 在终端中输入指令 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt安装依赖。
