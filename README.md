@@ -30,31 +30,31 @@
 
 **最终一共获得了20615条数据，可视化如下所示：**
 
-**1美赛各奖项计数情况**
+**1.美赛各奖项计数情况**
 
 [![image.png](https://i.postimg.cc/4yPt6wSP/image.png)](https://postimg.cc/BP8Xs5sP)
 
-**2美赛各参加学校计数前十五名**
+**2.美赛各参加学校计数前十五名**
 
 [![image.png](https://i.postimg.cc/tgRgPpHK/image.png)](https://postimg.cc/5XG1Wcyg)
 
-**3获得Successful Participant奖项最多前十五名学校名称**
+**3.获得Successful Participant奖项最多前十五名学校名称**
 
 [![Successful-Participant.png](https://i.postimg.cc/dVwQPwDh/Successful-Participant.png)](https://postimg.cc/8jXgL8RG)
 
-**4获得Honorable Mention奖项最多前十五名学校名称**
+**4.获得Honorable Mention奖项最多前十五名学校名称**
 
 [![Honorable-Mention.png](https://i.postimg.cc/MG48TSZb/Honorable-Mention.png)](https://postimg.cc/GBkf76yH)
 
-5**获得Meritorious Winner奖项最多前十五名学校名称**
+5**.获得Meritorious Winner奖项最多前十五名学校名称**
 
 [![Meritorious-Winner.png](https://i.postimg.cc/yYP4R9YN/Meritorious-Winner.png)](https://postimg.cc/566RdXzc)
 
-6**获得Finalist奖项最多前十五名学校名称**
+6.**获得Finalist奖项最多前十五名学校名称**
 
 [![Finalist.png](https://i.postimg.cc/59SkKJc7/Finalist.png)](https://postimg.cc/MXXDXhpV)
 
-**获得Outstanding Winner奖项最多前十五名学校名称**
+**7.获得Outstanding Winner奖项最多前十五名学校名称**
 
 [![Outstanding-Winner.png](https://i.postimg.cc/RCpwZpwC/Outstanding-Winner.png)](https://postimg.cc/F1cYPZPw)
 
