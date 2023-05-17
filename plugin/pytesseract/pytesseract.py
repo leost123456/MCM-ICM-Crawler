@@ -242,7 +242,6 @@ def run_tesseract(
     nice=0,
     timeout=0,
 ):
-    tesseract_cmd = f"{os.path.abspath('.')}\\plugin\\tesseract\\tesseract.exe"
     cmd_args = []
 
     if not sys.platform.startswith('win32') and nice != 0:
