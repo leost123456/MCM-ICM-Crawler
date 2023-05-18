@@ -11,10 +11,6 @@ def main():
     while not q.empty(): #队列不为空
         url_index=q.get() #拿到序号
 
-        if (url_index+1)%1000 ==0: #每进行1000轮保存一次数据
-            save_data(Team_number_list,Team_members_1_list,Team_members_2_list,Team_members_3_list,Instructor_list,
-              School_list,Awards_list)
-
         url=base_url+str(url_index)+'.pdf' #构造url
 
         #发送请求并转化成图片
@@ -37,6 +33,10 @@ def main():
             Instructor_list.append(faculty_name)
             School_list.append(school)
             Awards_list.append(awards)
+            if (url_index + 1) % 1000 == 0:  # 每进行1000轮保存一次数据
+                save_data(Team_number_list, Team_members_1_list, Team_members_2_list, Team_members_3_list,
+                          Instructor_list,
+                          School_list, Awards_list)
 
             #释放锁
             muti_lock.release()
@@ -90,7 +90,8 @@ if __name__ == '__main__':
     awards_re = re.compile(r'Was Designated As(.*)\n+.+',re.I | re.S | re.DOTALL)
     #创建队列
     q=queue.Queue(maxsize=n)
-    #将url数据存入队列中
+
+    #将url数据存入队列中  （注意2301434这种导师名称带中文，学校也带中文的会报错）
     for i in range(n):
         q.put(2300000+i)
 
@@ -98,8 +99,8 @@ if __name__ == '__main__':
     muti_lock = threading.Lock()
 
     # 创建存储列表
-    Team_number_list=[] #存储队伍号
-    Team_members_1_list=[] #队员1
+    Team_number_list= [] #存储队伍号
+    Team_members_1_list= [] #队员1
     Team_members_2_list = [] #队员2
     Team_members_3_list = [] #队员3
     Instructor_list=[] #指导老师

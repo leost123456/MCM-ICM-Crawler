@@ -44,14 +44,15 @@ def request_data(url,image_path): #其中url是传入的url
             pass
     except Exception as e: #网页打不开
         logger.error(f'号码为{team_number}的队伍不存在',str(e))
-        return None
+        raise e
 
 #下面进行OCR识别并进行提取需要的数据
 def extract_data(tessdata,image,team_number,detect_advisor,student_name_re,faculty_name_re,school_re,awards_re): #输入图像
     try:
         #进行OCR识别
         tessdata_dir_config = f'--tessdata-dir "{tessdata}"' #语言包地址（外部导入）
-        text=pytesseract.image_to_string(image,config=tessdata_dir_config,lang='eng') #进行OCR识别（英语）
+        text=pytesseract.image_to_string(image,config=tessdata_dir_config,lang='eng+chi_sim') #进行OCR识别（英语和汉语）chi_sim
+
         #进行匹配
         if detect_advisor.findall(text): #如果是有advisor的
             student_name=list(filter(None,student_name_re.search(text).group(1).strip('\n').strip().split('\n'))) #列表形式,并过滤空字符串 学生
@@ -59,12 +60,20 @@ def extract_data(tessdata,image,team_number,detect_advisor,student_name_re,facul
             school = school_re.search(text).group(1).strip('\n')  # 字符串形式 学校
         else: #有些奖状错误（要重新匹配学生和老师、学校）
             # 匹配姓名
-            name_re1 = re.compile(r'.*The Team [0|O]f(.*)[0|O]f.+Was Designated', re.I | re.S)
+            name_re1 = re.compile(r'.*The Team [0Oo]f(.*)Was Designated', re.I | re.S)
             name_list = list(filter(None, name_re1.search(text).group(1).strip('\n').strip().split('\n')))
-            index=name_list.index('Of') if 'Of' in name_list else name_list.index('of') #查找of的序号
-            student_name=name_list[:index-1]
-            faculty_name=name_list[index-1]
-            school=name_list[index+1]
+            #进行匹配of
+            for x in ['of','Of','0f']:
+                if x in name_list:
+                    index=name_list.index(x)
+                    student_name = name_list[:index - 1]
+                    faculty_name = name_list[index - 1]
+                    school = name_list[index + 1]
+                else:
+                    index=len(name_list)
+                    student_name = name_list[:index - 2]
+                    faculty_name = name_list[index - 2]
+                    school = name_list[index-1]
 
         awards=awards_re.search(text).group(1).strip('\n').split(sep='\n')[0] #字符串形式
 
@@ -75,8 +84,8 @@ def extract_data(tessdata,image,team_number,detect_advisor,student_name_re,facul
 
         return student_name,faculty_name,school,awards
     except Exception as e:
-        logger.error(f'队伍号为{team_number}的OCR识别和数据提取出错',str(e))
-        pass
+        logger.error(f'队伍号为{team_number}的OCR识别和数据提取出错')
+        raise e
 
 #进行保存数据到csv文件中
 def save_data(Team_number_list,Team_members_1_list,Team_members_2_list,Team_members_3_list,Instructor_list,
@@ -90,7 +99,7 @@ def save_data(Team_number_list,Team_members_1_list,Team_members_2_list,Team_memb
     result_csv['School'] = School_list
     result_csv['Awards'] = Awards_list
     result_csv.sort_values(by='Team number',inplace=True,ascending=True) #按队伍号升序
-    result_csv.to_csv('result\\data.csv',index=None,encoding='utf-8')
+    result_csv.to_csv('result\\data.csv',index=None,encoding='gbk')
     return result_csv
 
 #进行数据分析出图(如果有数据可以单独调用)
@@ -147,7 +156,8 @@ def plot_data(result_csv):
     result_csv['total number'] = result_csv['Team members 1'].apply(lambda x: 1 if x != 0 else 0) + \
                                  result_csv['Team members 2'].apply(lambda x: 1 if x != 0 else 0) + \
                                  result_csv['Team members 3'].apply(lambda x: 1 if x != 0 else 0)
-    member_num = result_csv['total number'].value_counts(ascending=True).values[1:]
+    member_num = result_csv['total number'].value_counts(ascending=True).values[:]
+    member_num = member_num[1:] if len(member_num)==4 else member_num  #确保只有三个（有些名称都是问号不能识别）
     index = np.arange(3)  # 横轴的特征数，这里有三特征，用于绘制簇状柱形图
     feature_index = ['1', '2', '3']  # 横轴x的特征名称
     # 进行绘制
@@ -155,7 +165,6 @@ def plot_data(result_csv):
     plt.style.use('seaborn-whitegrid')
     plt.tick_params(size=5, labelsize=13)  # 坐标轴
     width = 0.6
-    # 注意下面可以进行绘制误差线，如果是计算均值那种的簇状柱形图的话(注意类别多的话可以用循环的方式搞)
     plt.bar(index, member_num, width=width, alpha=0.4, color='#52D896')
     for i, data in enumerate(member_num):
         plt.text(index[i], data + 0.1, data, horizontalalignment='center', fontsize=13, family='Times New Roman')
@@ -173,7 +182,6 @@ def plot_data(result_csv):
     color_list = ['#fb9489', '#a9ddd4', '#9ec3db', '#cbc7de', '#fdfcc9']  # 颜色列表
     for i, award in enumerate(choose_award):
         school_count = result_csv[result_csv['Awards'] == award]['School'].value_counts()  # 选出对应奖项的数据
-        print(school_count)
         school_name = school_count.keys().tolist()[:15][::-1]  # 显示数量最多前15所学校
         school_num = list(school_count.values[:15])[::-1]
         height = 0.4  # 高度（每个条形之间）
@@ -191,3 +199,4 @@ def plot_data(result_csv):
         plt.title(f'获得{award}奖项最多前十五名学校名称', fontsize=15, family='SimHei')
         plt.savefig(f'result\\获得{award}奖项最多前十五名学校名称.svg', format='svg', bbox_inches='tight')
         plt.show()
+
