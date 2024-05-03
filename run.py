@@ -56,21 +56,16 @@ if __name__ == '__main__':
     # 更新(注意只会注入其中一次，运行完毕后删除)
     os.environ = env
 
-    # 创建存储目录
-    os.makedirs('result', exist_ok=True) #存储图片、数据和数据分析结果
-    os.makedirs('result\\Award Picture',exist_ok=True) #存储奖状图片
-    image_path='result\\Award Picture' #存储图片的地址
-    base_url=r'https://www.comap-math.com/mcm/2023Certs/' #基础url
-
-    #下面进行读取配置文件
+    # 下面进行读取配置文件
     logger.info('正在读取配置文件')
     try:
-        with open('config.yaml','r',encoding='utf-8') as f:
-            config=yaml.safe_load(f)
-            index=list(filter(None,config['index'].split('-'))) #总共爬取的队伍序号范围，列表形式['1','24000']
-            n_thread=config['n_thread'] #线程数量
+        with open('config.yaml', 'r', encoding='utf-8') as f:
+            config = yaml.safe_load(f)
+            year = config['year']  # 年份
+            index = list(filter(None, config['index'].split('-')))  # 总共爬取的队伍序号范围，列表形式['1','24000']
+            n_thread = config['n_thread']  # 线程数量
         try:
-            tessdata=config['tessdata'] #语言包路径
+            tessdata = config['tessdata']  # 语言包路径
         except:
             logger.error('tessdata语言包路径有误')
             exit()
@@ -78,6 +73,13 @@ if __name__ == '__main__':
     except Exception as e:
         logger.error('配置文件有误，请检查')
         exit()
+
+    # 创建存储目录
+    os.makedirs('result', exist_ok=True) #存储图片、数据和数据分析结果
+    os.makedirs('result\\Award Picture',exist_ok=True) #存储奖状图片
+    image_path='result\\Award Picture' #存储图片的地址
+    base_url=rf'https://www.comap-math.com/mcm/{str(year)}Certs/' #基础url
+
     # 下面设置正则表达式用于文本匹配
     detect_advisor = re.compile(r'.*With.*[Student|Faculty].*Advisor.*', re.I | re.S ) #检测文本是否正确
     # 1进行匹配学生姓名
@@ -94,7 +96,7 @@ if __name__ == '__main__':
     #将url数据存入队列中
 
     for i in range(int(index[0]),int(index[1])):
-        q.put(2300000+i)
+        q.put(2400000+i)
 
     # 下面创建一个线程锁对象，防止多线程存入结果中发生错乱（通过后续调用acquire和release方法来使用）,全局变量用于main()
     muti_lock = threading.Lock()
