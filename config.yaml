@@ -9,7 +9,7 @@ index: 1-31000
 #线程数，根据自己的CPU性能进行选择。默认50
 n_thread: 50
 
-#代理IP，若不设置代理IP则填None
+#本地代理IP，若无本地代理IP则填None
 proxy: http://127.0.0.1:10809
 
 #你安装的tesseract目录中的tesseract.exe文件的路径(下面是示例)
