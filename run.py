@@ -18,7 +18,7 @@ def main():
         url=base_url+str(url_index)+'.pdf' #构造url
 
         #发送请求并转化成图片
-        image=request_data(url,image_path)
+        image=request_data(url,image_path,proxy)
 
         #OCR识别并进行数据提取
         if image != None : #如果可以正确读取数据
@@ -64,6 +64,7 @@ if __name__ == '__main__':
             year = config['year']  # 年份
             index = list(filter(None, config['index'].split('-')))  # 总共爬取的队伍序号范围，列表形式['1','24000']
             n_thread = config['n_thread']  # 线程数量
+            proxy=config['proxy'] #代理
         try:
             tessdata = config['tessdata']  # 语言包路径
         except:

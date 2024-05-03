@@ -3,11 +3,14 @@
 #比赛年份
 year : 2024
 
-#爬取的序号范围(默认为1-24000，即队伍号为2300001-2324000)
-index: 1-30000
+#爬取的序号范围(默认为1-30000，即队伍号为2400001-2430000)
+index: 1-31000
 
 #线程数，根据自己的CPU性能进行选择。默认50
-n_thread: 200
+n_thread: 150
+
+#代理IP，若不设置代理IP则填None
+proxy: http://127.0.0.1:10809
 
 #你安装的tesseract目录中的tesseract.exe文件的路径(下面是示例)
 tesseract_exe: D:\0\other\tesseract\tesseract.exe

@@ -9,9 +9,13 @@ from plugin.pytesseract import pytesseract #用于OCR识别
 from PIL import Image
 import os
 from loguru import logger
+from matplotlib import rcParams
+
+config = {"font.family":'Times New Roman'}  # 设置画图字体类型
+rcParams.update(config)    #进行更新配置
 
 #下面发送请求并将pdf文件转化为png图片格式
-def request_data(url,image_path): #其中url是传入的url
+def request_data(url,image_path,proxy): #其中url是传入的url
     team_number = url.split('/')[-1].split('.')[0]  # 拿到队伍号
     # user_agent列表
     user_agent_list = [
@@ -29,11 +33,11 @@ def request_data(url,image_path): #其中url是传入的url
     }
     # 发送请求
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers,proxies={'https':proxy,'http':proxy})  # 发送请求（注意这里的代理）
         team_number = url.split('/')[-1].split('.')[0]  # 拿到队伍号
         if not str(response.status_code).startswith('4'): #不是返回4开头的状态码
             # 下面进行将读取的二进制pdf数据存储为png图片格式
-            image = convert_from_bytes(response.content)  # 将二进制数据转化为图片
+            image = convert_from_bytes(response.content)  # 将读取二进制数据并转化为图片
             # 进行读取pdf内容并保存到本地
             image[0].save(f'{image_path}\\{str(team_number)}.png', 'PNG')  # 将图片进行保存到对应的文件中（png格式，注意只有1页）
             image = Image.open(os.path.join(image_path, f'{team_number}.png'))  # 导入图像
