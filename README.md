@@ -36,27 +36,27 @@
 
 **2.美赛各参加学校计数前十五名**
 
-[![image.png](https://i.postimg.cc/cLvJt0LT/image.png)](https://postimg.cc/4YTGrCth)
+[![image.png](https://i.postimg.cc/s1dnfmtQ/image.png)](https://postimg.cc/dZ6R42Qw)
 
 **3.获得Successful Participant奖项最多前十五名学校名称**
 
-[![Successful-Participant.png](https://i.postimg.cc/P53xY5p7/Successful-Participant.png)](https://postimg.cc/RWt4z9T1)
+[![Successful-Participant.png](https://i.postimg.cc/d1fHpw69/Successful-Participant.png)](https://postimg.cc/BLxB1Wd8)
 
 **4.获得Honorable Mention奖项最多前十五名学校名称**
 
-[![Honorable-Mention.png](https://i.postimg.cc/0j05Qk1c/Honorable-Mention.png)](https://postimg.cc/ct6GkNHn)
+[![Honorable-Mention.png](https://i.postimg.cc/rpcvNVZ0/Honorable-Mention.png)](https://postimg.cc/gxSSYWWm)
 
 5**.获得Meritorious Winner奖项最多前十五名学校名称**
 
-[![Meritorious-Winner.png](https://i.postimg.cc/2515wNnS/Meritorious-Winner.png)](https://postimg.cc/TyXGdSkz)
+[![Meritorious-Winner.png](https://i.postimg.cc/SxLPR0Qy/Meritorious-Winner.png)](https://postimg.cc/Yv9RDsmV)
 
 6.**获得Finalist奖项最多前十五名学校名称**
 
-[![Finalist.png](https://i.postimg.cc/2S8y1Z6v/Finalist.png)](https://postimg.cc/8j9N3sLP)
+[![Finalist.png](https://i.postimg.cc/vZ5Jnghw/Finalist.png)](https://postimg.cc/k2XY35LT)
 
 **7.获得Outstanding Winner奖项最多前十五名学校名称**
 
-[![Outstanding-Winner.png](https://i.postimg.cc/D0TynWHS/Outstanding-Winner.png)](https://postimg.cc/VrKcFNYw)
+[![Outstanding-Winner.png](https://i.postimg.cc/BvMw5x1k/Outstanding-Winner.png)](https://postimg.cc/B8Pg4PpB)
 
 ---
 

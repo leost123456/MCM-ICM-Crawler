@@ -99,6 +99,7 @@ def save_data(Team_number_list,Team_members_1_list,Team_members_2_list,Team_memb
 
 #进行数据分析出图(如果有数据可以单独调用)
 def plot_data(result_csv):
+    result_csv['School'] = result_csv['School'].str.upper()  # 全部变为大写
     # 奖项名称
     Awards_name = ['Not Judged', 'Disqualified - P', 'Unsuccessful - I', 'Successful Participant', 'Honorable Mention',
                    'Meritorious Winner', 'Finalist', 'Outstanding Winner']
@@ -196,5 +197,8 @@ def plot_data(result_csv):
         plt.title(f'获得{award}奖项最多前十五名学校名称', fontsize=15, family='SimHei')
         plt.savefig(f'result\\获得{award}奖项最多前十五名学校名称.svg', format='svg', bbox_inches='tight')
         plt.show()
+
+
+
 
 
